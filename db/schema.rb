@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_085227) do
     t.bigint "user_id"
     t.string "email"
     t.string "password_digest"
-    t.boolean "is_activated"
+    t.boolean "is_activated", default: false
     t.datetime "activated_at"
     t.string "activation_code"
     t.string "activation_code_expired_at"
