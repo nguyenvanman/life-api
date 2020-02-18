@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_085227) do
     t.string "activation_code_expired_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|

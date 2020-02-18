@@ -11,5 +11,7 @@ class CreateAccounts < ActiveRecord::Migration[6.0]
       t.string :activation_code_expired_at
       t.timestamps
     end
+
+    add_index :accounts, :email, unique: true
   end
 end
