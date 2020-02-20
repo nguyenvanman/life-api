@@ -7,9 +7,10 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'bcrypt'
+gem 'jwt'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'active_model_serializers'
-
+gem 'pg', '>= 0.18', '< 2.0'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
