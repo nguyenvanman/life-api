@@ -4,7 +4,7 @@ class AuthController < ApplicationController
     token, user = AuthService::SignIn.call(sign_in_params)
     data = {
       token: token,
-      user: user  
+      user: UserSerializer.new(user)  
     }
     render_data data
   end
