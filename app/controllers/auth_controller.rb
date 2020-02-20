@@ -1,7 +1,12 @@
 class AuthController < ApplicationController
 
   def sign_in
-    AuthService::SignIn.call(sign_in_params)
+    token, user = AuthService::SignIn.call(sign_in_params)
+    data = {
+      token: token,
+      user: user  
+    }
+    render_data data
   end
 
   def sign_in_params
