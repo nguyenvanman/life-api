@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  scope :api do
+    scope :auth do 
+      post 'sign_in', to: 'auth#sign_in'
+    end 
+  end
+
 end
