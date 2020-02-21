@@ -6,7 +6,6 @@ class AuthController < ApplicationController
       token: token,
       user: UserSerializer.new(user)  
     }
-    
     render_data data
   end
 
@@ -15,7 +14,6 @@ class AuthController < ApplicationController
     data = {
       user: UserSerializer.new(user)
     }
-
     render_data data
   end
 
