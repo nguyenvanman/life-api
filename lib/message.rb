@@ -8,4 +8,7 @@ class Message
     'Incorrect password'
   end
   
+  def self.email_is_existed
+    'Email is existed'
+  end
 end
