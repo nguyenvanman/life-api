@@ -42,5 +42,4 @@ module ExceptionHandler
     render_error(exception,400)
   end
 
-
 end
