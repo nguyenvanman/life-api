@@ -2,12 +2,15 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   class AuthenticationError < StandardError; end
+  
+  class BadRequestError < StandardError; end
 
   included do
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found 
     rescue_from ActiveRecord::RecordInvalid, with: :record_invalid 
     rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
     rescue_from ActionController::ParameterMissing, with: :parameter_missing
+    rescue_from BadRequestError, with: :bad_request_error
     rescue_from AuthenticationError, with: :authentication_error
   end
 
@@ -34,5 +37,10 @@ module ExceptionHandler
   def render_error exception, code
     render json: ErrorSerializer.new(exception), status: code
   end
+
+  def bad_request_error exception
+    render_error(exception,400)
+  end
+
 
 end
