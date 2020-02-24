@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  include UserService
+  def update
+    user = UserService::Update.call(@current_user, user_params)
+    render_one user
+  end
+
   def show
     render_one User.find(params[:id]) 
   end
@@ -11,7 +17,7 @@ class UsersController < ApplicationController
 
   def render_one user
     data = {
-      user: user
+      user: UserSerializer.new(user)
     }
 
     render_data data
@@ -23,6 +29,11 @@ class UsersController < ApplicationController
     }
 
     render_data data
+  end
+
+  def user_params
+    params.require(%i[name phone address gender])
+    params.permit(:name, :phone, :address,:gender)
   end
 
 end
