@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope :users do
       scope :me do
         put '', to: 'users#update'
-        resources :transaction_items
+        resources :transaction_items, only: %i[create]
       end
     end
   end
