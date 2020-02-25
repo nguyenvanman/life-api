@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     end 
 
     scope :users do
-      put 'me', to: 'users#update'
+      scope :me do
+        put '', to: 'users#update'
+        resources :transaction_items, only: %i[create]
+      end
     end
   end
 

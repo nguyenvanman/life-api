@@ -1,4 +1,5 @@
 class TransactionItem < ApplicationRecord
   belongs_to :user 
   has_and_belongs_to_many :categories
+  enum transaction_type: { income: 'income', outcome: 'outcome' }
 end
