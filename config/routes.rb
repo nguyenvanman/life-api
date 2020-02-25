@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope :users do
       scope :me do
         put '', to: 'users#update'
-        post 'transaction_item', to: 'transaction_items#create'
+        resources :transaction_items
       end
     end
   end
