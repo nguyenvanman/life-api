@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_030710) do
 #   Unknown type 'transaction_types' for column 'transaction_type'
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "phone"
     t.boolean "gender", default: false
     t.string "address"
