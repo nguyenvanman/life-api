@@ -1,6 +1,6 @@
-class CreateTransactions < ActiveRecord::Migration[6.0]
+class CreateTransactionItems < ActiveRecord::Migration[6.0]
   def change
-    create_table :transactions do |t|
+    create_table :transaction_items do |t|
       t.references :user, null: false, foreign_key: true
       t.float :amount, null: false
       t.datetime :time, null: false

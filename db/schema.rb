@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_030710) do
+ActiveRecord::Schema.define(version: 2020_02_25_043732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,14 @@ ActiveRecord::Schema.define(version: 2020_02_25_030710) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "category_transactions", force: :cascade do |t|
-    t.bigint "transaction_id", null: false
+  create_table "categories_transaction_items", force: :cascade do |t|
+    t.bigint "transaction_item_id", null: false
     t.bigint "category_id", null: false
-    t.index ["category_id"], name: "index_category_transactions_on_category_id"
-    t.index ["transaction_id"], name: "index_category_transactions_on_transaction_id"
+    t.index ["category_id"], name: "index_categories_transaction_items_on_category_id"
+    t.index ["transaction_item_id"], name: "index_categories_transaction_items_on_transaction_item_id"
   end
 
-# Could not dump table "transactions" because of following StandardError
+# Could not dump table "transaction_items" because of following StandardError
 #   Unknown type 'transaction_types' for column 'transaction_type'
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_030710) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "category_transactions", "categories"
-  add_foreign_key "category_transactions", "transactions"
-  add_foreign_key "transactions", "users"
+  add_foreign_key "categories_transaction_items", "categories"
+  add_foreign_key "categories_transaction_items", "transaction_items"
+  add_foreign_key "transaction_items", "users"
 end
