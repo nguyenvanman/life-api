@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_043732) do
+ActiveRecord::Schema.define(version: 2020_02_27_020427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2020_02_25_043732) do
 
 # Could not dump table "transaction_items" because of following StandardError
 #   Unknown type 'transaction_types' for column 'transaction_type'
+
+  create_table "user_data", force: :cascade do |t|
+    t.bigint "user_id"
+    t.float "current_budget"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
