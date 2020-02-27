@@ -3,7 +3,6 @@ module AuthService::SignUp
     account = Account.find_by(email: sign_up_params[:email])
     raise(ExceptionHandler::BadRequestError, Message.email_is_existed) if account
     user = UserService::Create.call(sign_up_params)
-    user.create_account!(sign_up_params.except(:name))
     user
   end
 end
