@@ -11,4 +11,5 @@ class User < ApplicationRecord
       config.decrease_budget transaction_item.amount
     end
   end
+
 end
