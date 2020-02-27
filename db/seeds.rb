@@ -7,7 +7,7 @@ user.create_account(
   password: '12345678'
 )
 
-user.create_user_config
+user.create_config
 
 Category.create!(
   name: 'Food'
