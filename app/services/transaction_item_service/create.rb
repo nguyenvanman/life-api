@@ -6,7 +6,6 @@ module TransactionItemService::Create
       else
         user.config.decrease_budget transaction_item.amount
       end
-      user.config.save
       categories = transaction_item_params[:categories]
       transaction_item.categories << categories.map do |category|
         CategoryService::FindOrCreate.call(category)
