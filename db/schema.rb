@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_020427) do
+ActiveRecord::Schema.define(version: 2020_02_27_040345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_020427) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "categories_transaction_items", force: :cascade do |t|
@@ -44,11 +45,12 @@ ActiveRecord::Schema.define(version: 2020_02_27_020427) do
 # Could not dump table "transaction_items" because of following StandardError
 #   Unknown type 'transaction_types' for column 'transaction_type'
 
-  create_table "user_data", force: :cascade do |t|
+  create_table "user_configs", force: :cascade do |t|
     t.bigint "user_id"
-    t.float "current_budget"
+    t.float "current_budget", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_configs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,4 +65,5 @@ ActiveRecord::Schema.define(version: 2020_02_27_020427) do
   add_foreign_key "categories_transaction_items", "categories"
   add_foreign_key "categories_transaction_items", "transaction_items"
   add_foreign_key "transaction_items", "users"
+  add_foreign_key "user_configs", "users"
 end
