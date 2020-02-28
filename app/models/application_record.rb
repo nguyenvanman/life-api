@@ -3,5 +3,5 @@ class ApplicationRecord < ActiveRecord::Base
 
   cattr_accessor :current_user
 
-  scope :mine, -> { where(user_id: current_user.id) }
+  scope :mine, -> { where(user_id: current_user&.id) }
 end
