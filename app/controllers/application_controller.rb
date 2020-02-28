@@ -8,5 +8,6 @@ class ApplicationController < ActionController::API
     token = request.headers['Authorization']
     data_token = JsonWebToken.decode token
     @current_user = User.find(data_token[:user_id])
+    ApplicationRecord.current_user = @current_user
   end
 end

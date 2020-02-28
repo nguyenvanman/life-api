@@ -1,12 +1,12 @@
 module TransactionItemService::Index
-  def self.call(date, type, id)
+  def self.call(date, type)
     date = (date || DateTime.now).to_datetime
     if type == 'week'
-      TransactionItem.in_week(date, id)
+      TransactionItem.includes(:categories).mine.in_week(date)
     elsif type == 'month'
-      TransactionItem.in_month(date, id)
+      TransactionItem.includes(:categories).mine.in_month(date)
     else
-      TransactionItem.in_date(date, id)
+      TransactionItem.includes(:categories).mine.in_date(date)
     end
   end
 end

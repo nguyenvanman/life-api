@@ -6,7 +6,7 @@ class TransactionItemsController < ApplicationController
   end
 
   def index
-    transaction_items = TransactionItemService::Index.call(params[:date], params[:type], @current_user.id)
+    transaction_items = TransactionItemService::Index.call(params[:date], params[:type])
     render_list transaction_items
   end
 
