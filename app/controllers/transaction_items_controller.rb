@@ -5,9 +5,24 @@ class TransactionItemsController < ApplicationController
     render_one transaction_item
   end
 
+  def index
+    transaction_items = TransactionItemService::Index.call(params[:date], params[:type])
+    render_list transaction_items
+  end
+
   def render_one transaction_item
     data = {
       transaction_item: TransactionItemSerializer.new(transaction_item)
+    }
+
+    render_data data
+  end
+
+  def render_list transaction_items
+    data = {
+      transaction_items: transaction_items.map { |transaction_item| 
+        TransactionItemSerializer.new(transaction_item)
+      } 
     }
 
     render_data data
@@ -17,4 +32,5 @@ class TransactionItemsController < ApplicationController
     params.require(%i[amount time note transaction_type categories])
     params.permit(:amount, :time, :note, :transaction_type, categories: [])
   end
+
 end
