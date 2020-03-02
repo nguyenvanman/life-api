@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render_one User.find(params[:id]) 
+    render_one @current_user, UserDataSerializer
   end
 
   def index
@@ -15,9 +15,9 @@ class UsersController < ApplicationController
 
   private
 
-  def render_one user
+  def render_one(user, serializer_class = UserSerializer) 
     data = {
-      user: UserSerializer.new(user)
+      user: serializer_class.new(user)
     }
 
     render_data data

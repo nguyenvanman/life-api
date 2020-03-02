@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     scope :users do
       scope :me do
+        get '', to: 'users#show'
         put '', to: 'users#update'
         resources :transaction_items, only: %i[create index]
       end
