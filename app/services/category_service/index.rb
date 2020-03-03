@@ -4,6 +4,6 @@ module CategoryService::Index
     user.transaction_items.each do |transaction_item|
         categories += transaction_item.categories
     end
-    categories.uniq  {|category| [category.name]}
+    categories.uniq  {|category| category.id}
   end
 end
