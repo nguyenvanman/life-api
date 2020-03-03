@@ -10,6 +10,10 @@ class TransactionItemsController < ApplicationController
     render_list transaction_items
   end
 
+  def get_by_category
+    render_list TransactionItemService::GetByCategory.call(params[:category_id])
+  end
+
   def render_one transaction_item
     data = {
       transaction_item: TransactionItemSerializer.new(transaction_item)
