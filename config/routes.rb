@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get '', to: 'users#show'
         put '', to: 'users#update'
         resources :transaction_items, only: %i[create index]
+        resources :categories, only: %i[index]
       end
     end
   end
