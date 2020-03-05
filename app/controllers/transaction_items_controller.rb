@@ -11,7 +11,7 @@ class TransactionItemsController < ApplicationController
   end
 
   def get_by_category
-    render_list TransactionItemService::GetByCategory.call(params[:category_id])
+    render_list TransactionItemService::GetByCategory.call(params[:date], params[:type],params[:category_id])
   end
 
   def render_one transaction_item

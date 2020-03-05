@@ -7,5 +7,6 @@ class TransactionItem < ApplicationRecord
   scope :in_week, ->(date){ where("extract(week from time) = ?", date.cweek) }
   scope :in_month, ->(date){ where("extract(month from time) = ?", date.month) }
   scope :in_year, ->(date){ where("extract(year from time) = ?", date.year) }
+  scope :of_category, ->(id){ joins(:categories).where("category_id = ?", id) }
   
 end
