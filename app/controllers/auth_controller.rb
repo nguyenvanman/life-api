@@ -3,10 +3,11 @@ class AuthController < ApplicationController
   skip_before_action :authorize_request
   
   def sign_in
-    token, user = AuthService::SignIn.call(sign_in_params)
+    token, expired_time, user = AuthService::SignIn.call(sign_in_params)
     data = {
+      user: UserSerializer.new(user),  
       token: token,
-      user: UserSerializer.new(user)  
+      expired_time: expired_time
     }
     render_data data
   end

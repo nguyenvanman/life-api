@@ -5,7 +5,7 @@ module UtilService::TokenGenerator
       user_id: account.user_id,
       email: account.email
     }
-    UtilService::JsonWebToken.encode(payload)
+    token, expired_time = UtilService::JsonWebToken.encode(payload)
   end
 
 end

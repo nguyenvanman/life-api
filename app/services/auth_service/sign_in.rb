@@ -3,6 +3,7 @@ module AuthService::SignIn
     account = Account.find_by(email: sign_in_params[:email])
     raise(ExceptionHandler::AuthenticationError, Message.email_not_found) unless account
     raise(ExceptionHandler::AuthenticationError, Message.incorrect_password) unless account.authenticate(sign_in_params[:password])
-    return UtilService::TokenGenerator.call(account), account.user
+    token, expired_time = UtilService::TokenGenerator.call(account)
+    return token, expired_time, account.user
   end
 end

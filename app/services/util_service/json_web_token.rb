@@ -4,7 +4,7 @@ module UtilService
   
     def self.encode(payload, exp = 24.hours.from_now)
       payload[:exp] = exp.to_i  
-      JWT.encode(payload, HMAC_SECRET)
+      return JWT.encode(payload, HMAC_SECRET), exp
     end
   
     def self.decode(token)
