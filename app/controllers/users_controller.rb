@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(%i[name phone address gender])
-    params.permit(:name, :phone, :address,:gender)
+    params.permit(:name, :phone, :address, :gender, :image_url)
   end
 
 end
