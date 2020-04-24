@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_104634) do
+ActiveRecord::Schema.define(version: 2020_04_24_105736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2020_04_24_104634) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+  end
+
+  create_table "categories_outcomes", force: :cascade do |t|
+    t.bigint "outcome_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_categories_outcomes_on_category_id"
+    t.index ["outcome_id"], name: "index_categories_outcomes_on_outcome_id"
   end
 
   create_table "categories_transaction_items", force: :cascade do |t|
@@ -96,6 +103,8 @@ ActiveRecord::Schema.define(version: 2020_04_24_104634) do
     t.string "image_url"
   end
 
+  add_foreign_key "categories_outcomes", "categories"
+  add_foreign_key "categories_outcomes", "outcomes"
   add_foreign_key "categories_transaction_items", "categories"
   add_foreign_key "categories_transaction_items", "transaction_items"
   add_foreign_key "transaction_items", "users"
