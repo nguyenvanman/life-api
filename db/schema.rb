@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_103331) do
+ActiveRecord::Schema.define(version: 2020_04_24_104634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,29 @@ ActiveRecord::Schema.define(version: 2020_04_24_103331) do
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_categories_transaction_items_on_category_id"
     t.index ["transaction_item_id"], name: "index_categories_transaction_items_on_transaction_item_id"
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.float "value", default: 0.0, null: false
+    t.string "note"
+    t.datetime "time"
+    t.string "source"
+    t.jsonb "detail"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_incomes_on_user_id"
+  end
+
+  create_table "outcomes", force: :cascade do |t|
+    t.float "value", default: 0.0
+    t.string "note"
+    t.datetime "time"
+    t.jsonb "detail"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_outcomes_on_user_id"
   end
 
 # Could not dump table "transaction_items" because of following StandardError
