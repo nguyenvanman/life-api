@@ -16,6 +16,7 @@ class TransactionItemsController < ApplicationController
 
   def render_one transaction_item
     data = {
+      user: UserSerializer.new(@current_user),
       transaction_item: TransactionItemSerializer.new(transaction_item)
     }
 
@@ -24,9 +25,8 @@ class TransactionItemsController < ApplicationController
 
   def render_list transaction_items
     data = {
-      transaction_items: transaction_items.map { |transaction_item| 
-        TransactionItemSerializer.new(transaction_item)
-      } 
+      user: UserSerializer.new(@current_user),
+      transaction_items: transaction_items.map { |transaction_item| TransactionItemSerializer.new(transaction_item) } 
     }
 
     render_data data

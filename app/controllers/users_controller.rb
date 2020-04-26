@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render_one @current_user, UserDataSerializer
+    render_one @current_user, UserSerializer
   end
 
   def index

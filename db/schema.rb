@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_105736) do
+ActiveRecord::Schema.define(version: 2020_04_26_061406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_105736) do
 
   create_table "budgets", force: :cascade do |t|
     t.float "total", default: 0.0
-    t.float "credit", default: 0.0
+    t.float "atm", default: 0.0
     t.float "cash", default: 0.0
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -45,13 +45,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_105736) do
     t.string "image"
   end
 
-  create_table "categories_outcomes", force: :cascade do |t|
-    t.bigint "outcome_id", null: false
-    t.bigint "category_id", null: false
-    t.index ["category_id"], name: "index_categories_outcomes_on_category_id"
-    t.index ["outcome_id"], name: "index_categories_outcomes_on_outcome_id"
-  end
-
   create_table "categories_transaction_items", force: :cascade do |t|
     t.bigint "transaction_item_id", null: false
     t.bigint "category_id", null: false
@@ -59,39 +52,8 @@ ActiveRecord::Schema.define(version: 2020_04_24_105736) do
     t.index ["transaction_item_id"], name: "index_categories_transaction_items_on_transaction_item_id"
   end
 
-  create_table "incomes", force: :cascade do |t|
-    t.float "value", default: 0.0, null: false
-    t.string "note"
-    t.datetime "time"
-    t.string "source"
-    t.jsonb "detail"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_incomes_on_user_id"
-  end
-
-  create_table "outcomes", force: :cascade do |t|
-    t.float "value", default: 0.0
-    t.string "note"
-    t.datetime "time"
-    t.jsonb "detail"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_outcomes_on_user_id"
-  end
-
 # Could not dump table "transaction_items" because of following StandardError
 #   Unknown type 'transaction_types' for column 'transaction_type'
-
-  create_table "user_configs", force: :cascade do |t|
-    t.bigint "user_id"
-    t.float "current_budget", default: 0.0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_user_configs_on_user_id"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -103,10 +65,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_105736) do
     t.string "image_url"
   end
 
-  add_foreign_key "categories_outcomes", "categories"
-  add_foreign_key "categories_outcomes", "outcomes"
   add_foreign_key "categories_transaction_items", "categories"
   add_foreign_key "categories_transaction_items", "transaction_items"
   add_foreign_key "transaction_items", "users"
-  add_foreign_key "user_configs", "users"
 end
