@@ -33,7 +33,7 @@ class TransactionItemsController < ApplicationController
   end
 
   def transaction_item_params
-    params.require(%i[amount time note transaction_type categories source])
+    params.require(%i[amount time note transaction_type source])
     params.permit(:amount, :time, :note, :transaction_type, :source, categories: [])
   end
 

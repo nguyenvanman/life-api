@@ -1,5 +1,6 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
+  include Response
 
   class AuthenticationError < StandardError; end
   
@@ -29,17 +30,8 @@ module ExceptionHandler
   def parameter_missing exception 
     render_error(exception, 400)
   end
-  
-  def authentication_error exception
-    render_error(exception, 401)
-  end
-
-  def render_error exception, code
-    render json: ErrorSerializer.new(exception), status: code
-  end
 
   def bad_request_error exception
     render_error(exception,400)
-  end
-
+  end 
 end
