@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       scope :me do
         get '', to: 'users#show'
         put '', to: 'users#update'
+        put 'config', to: 'users#update_config'
         resources :transaction_items, only: %i[create index] 
         resources :categories, only: %i[index] do
           get 'transactions', to:'transaction_items#get_by_category'

@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     render_one @current_user, UserSerializer
   end
 
+  def update_config
+    user = UserService::UpdateConfig.call(@current_user, config_params)
+    render_one user, UserSerializer
+  end
+
   def index
     render_list User.all 
   end
@@ -29,6 +34,11 @@ class UsersController < ApplicationController
     }
 
     render_data data
+  end
+
+  def config_params
+    params.require(%i[has_limited_outcome_per_week limited_outcome_per_week has_limited_outcome_per_month limited_outcome_per_month])
+    params.permit(:has_limited_outcome_per_week, :limited_outcome_per_week, :has_limited_outcome_per_month, :limited_outcome_per_month)
   end
 
   def user_params
