@@ -18,4 +18,11 @@ class User < ApplicationRecord
     budget.total = budget.atm + budget.cash
     budget.save
   end
+
+  def recalculate_budget
+    budget.atm = transaction_items.select { |it| it.income? && it.atm? }.inject(0) { |sum, x| sum + x.amount } - transaction_items.select { |it| it.outcome? && it.atm? }.inject(0) { |sum, x| sum + x.amount }
+    budget.cash = transaction_items.select { |it| it.income? && it.cash? }.inject(0) { |sum, x| sum + x.amount } - transaction_items.select { |it| it.outcome? && it.cash? }.inject(0) { |sum, x| sum + x.amount }
+    budget.total = budget.atm + budget.cash
+    budget.save
+  end
 end

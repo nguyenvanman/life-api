@@ -1,5 +1,7 @@
 class TransactionItemsController < ApplicationController
 
+  before_action :get_transaction, only: %i[update destroy]
+
   def create
     transaction_item = TransactionItemService::Create.call(@current_user, transaction_item_params)
     render_one transaction_item
@@ -10,8 +12,23 @@ class TransactionItemsController < ApplicationController
     render_list transaction_items
   end
 
+  def update
+    transaction_item = TransactionItemService::Update.call(@transaction_item, transaction_item_params)
+    render_one transaction_item
+  end
+
+  def destroy
+    @transaction_item.destroy!
+    @current_user.recalculate_budget
+    render_one @transaction_item
+  end
+
   def get_by_category
     render_list TransactionItemService::GetByCategory.call(params[:date], params[:type],params[:category_id])
+  end
+
+  def get_transaction
+    @transaction_item = TransactionItem.find(params[:id])
   end
 
   def render_one transaction_item
